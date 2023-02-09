@@ -8,9 +8,9 @@
             ref="writeArea" type="text" v-model="addItemText">
             <button class="btn add" @click.prevent="addItem">Add</button>
             </div>
-            <ul v-for="item in todos" class="list" :key="item.text">
+            <ul class="list" v-for="(item,i) in todos" :key="item.text">
             <li>
-                <i @click="checkItem" :class="[item.state==='yet' ? `far` : `fas`, `fa-check-square`]"></i>
+                <i @click="checkItem(i)" :class="[item.state==='yet' ? `far` : `fas`, `fa-check-square`]"></i>
                 <span>
                 {{ item.text }}
                 <b>
@@ -43,11 +43,11 @@ export default {
         addItem() {
             this.todos.push({text: this.addItemText, state: 'yet'})
         },
-        checkItem(){
-          if(this.todos.state==='yet'){
-            this.todos.state='done'}
+        checkItem(i){
+          if(this.todos[i].state==='yet'){
+            this.todos[i].state='done'}
           else{
-            this.todos.state='yet'}
+            this.todos[i].state='yet'}
         }
 
     },
